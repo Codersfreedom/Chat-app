@@ -1,0 +1,50 @@
+aside{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    width: 70px;
+    height: 97%;
+    border-radius: 15px;
+    background: #11101d;
+    transition: 0.5s;
+    z-index: 10;
+    box-shadow: 5px 0 10px rgba(0, 0, 0, 0.5);
+}
+.side-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    padding: 20px 0;
+    
+}
+.icons-container{
+    display: flex;
+    gap: 40px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    
+}
+.bottom-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    margin-bottom: 20px;
+
+}
+.icon{
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition:all 0.3s ease-in-out;
+}
+
+.icon:hover{
+   transform: scale(1.2);
+}

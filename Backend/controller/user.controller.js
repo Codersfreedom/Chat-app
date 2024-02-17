@@ -1,4 +1,3 @@
-import { json } from 'express';
 import Conversation from '../model/conversation.model.js';
 import User from '../model/user.model.js';
 
