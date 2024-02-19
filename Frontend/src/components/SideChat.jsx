@@ -5,7 +5,7 @@ import './SideChat.css'
 const SideChat = () => {
   return (
     <div className='side-chat-container' >
-        <div className="search-container">
+        <form className="search-container">
             <span>Chat</span>
             <div className="input-container">
             <input type="text" placeholder="Search" />
@@ -13,12 +13,13 @@ const SideChat = () => {
             <IoIosAddCircle id='add' className='icons' />
             </div>
 
-        </div>
+        </form>
         <div className="chats-container">
             <h2>All</h2>
-            <div className="chats">
-                <div className="chat">
-                    <img src="https://via.placeholder.com/150" alt="user" />
+            <div className="chats active">
+                <div className="chat ">
+                    <img  src="https://via.placeholder.com/150" alt="user" />
+                    <div className="avatar-online"></div>
                     <div className="chat-info">
                         <h4>Tony Stark</h4>
                         <p>Hey this is Tony Stark!</p>
@@ -32,9 +33,29 @@ const SideChat = () => {
                             </div>
                     </div>
                 </div>
+            </div>
+
+            <div className="chats">
+                <div className="chat">
+                    <img src="https://via.placeholder.com/150" alt="user" />
+                    <div className="chat-info">
+                        <h4>Tony Stark</h4>
+                        <p>Hey this is Bruce Banner.</p>
+                    </div>
+                    <div className="time-info">
+                        <div>
+                            <p>11:00AM</p>
+                        </div>
+                        <div id='message-count' >
+                            <p>1</p>
+                            </div>
+                    </div>
+                </div>
                
               
             </div>
+
+ 
         </div>
     </div>
   )
