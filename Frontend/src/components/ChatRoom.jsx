@@ -1,25 +1,57 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { CiSearch } from "react-icons/ci";
 import { BsThreeDots } from "react-icons/bs";
-import { TiTick } from "react-icons/ti";
+
 import { BsEmojiSmile } from "react-icons/bs";
 import { IoMdSend } from "react-icons/io";
 
+
+
 import './ChatRoom.css'
+import useConversation from '../zustand_store/useConversation';
+import useSendMessage from '../hooks/useSendMessage';
+import { useAuthContext } from '../context/AuthContext';
+import useGetMessages from '../hooks/useGetMessages';
+import Chats from './Chats/Chats';
 
 const ChatRoom = () => {
-    const noChatSelected = true;
+
+    const { selectedConversation, setSelectedConversation } = useConversation();
+    const [message, setMessage] = useState();
+    const { sendMessages } = useSendMessage();
+    const { messages, loading } = useGetMessages();
+
+    const lastMessageRef = useRef();
+    useEffect(()=>{
+        setTimeout(() => {
+            lastMessageRef.current?.scrollIntoView({behavior: "smooth"});
+            
+        }, 100);
+    },[messages])
+    
+    useEffect(() => {
+        return () => setSelectedConversation(null);
+    }, [])
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (!message) {
+            return
+        }
+        await sendMessages(message);
+        setMessage("");
+    }
 
 
     return (
         <div className='chat-room-container'>
-            {noChatSelected ? (<NoChatSelected />) :
+            {!selectedConversation ? (<NoChatSelected selectedConversation={selectedConversation} />) :
                 (<>
                     <div className="chat-room-top-div">
                         <div className="profile-info">
-                            <img src="https://via.placeholder.com/150" alt="user" />
+                            <img src={selectedConversation.profilePic} alt="user" />
                             <div className="name">
-                                <h4>Tony Stark</h4>
+                                <h4>{selectedConversation.fullname}</h4>
                                 <small>Online</small>
                             </div>
                         </div>
@@ -34,40 +66,32 @@ const ChatRoom = () => {
                             </div>
                         </div>
                     </div>
+
+
                     <div className="chat-room">
-                        <div className="sender-div">
-                            <div className="sender-chat">
-                                <div className="sender-text">
-                                    <p>Hey this is Tony!</p>
-                                </div>
-                                <div className='chat-date-info' >
-                                    <small>11:00AM</small>
-                                    <span><TiTick className='icons' /></span>
-                                </div>
 
-
-
+                        {!loading && messages.length === 0 && (
+                            <h3 className='start-conversation' >Send a message to start the conversation</h3>
+                        )}
+                        {!loading && messages.length > 0 && messages.map((message) => (
+                           <div key={message._id} ref={lastMessageRef} >
+                                <Chats
+                                message ={message}
+                                />
+                                
                             </div>
-                        </div>
-                        <div className="receiver-div">
-                            <div className="receiver-chat">
-                                <div className="receiver-text">
-                                    <p>Hey Tony this is banner.</p>
-                                </div>
-                                <div className='chat-date-info' >
-                                    <small>11:00AM</small>
+                        ))}
 
-                                </div>
-                            </div>
-                        </div>
                         <div className="chat-input-container">
-                            <form className="chat-input">
-                                <input type="text" placeholder='Write messages...' />
+                            <form className="chat-input" onSubmit={handleSubmit} >
+                                <input type="text" placeholder='Write messages...'
+                                    value={message}
+                                    onChange={(e) => { setMessage(e.target.value) }}
+                                />
                                 <BsEmojiSmile id='emoji' />
-                            </form  >
-                            <div className="send-btn">
                                 <IoMdSend id='sendBtn' />
-                            </div>
+                            </form  >
+                            
                         </div>
                     </div> </>)}
 
@@ -78,9 +102,13 @@ const ChatRoom = () => {
 export default ChatRoom
 
 const NoChatSelected = () => {
+    const { authUser } = useAuthContext();
+
+
+
     return (
         <div className='no-chat'>
-            <h3>Welcome ✋ Tony Stark! <br /> Select a chat to start messaging </h3>
+            <h3>Welcome ✋{authUser.Fullname} ! <br /> Select a chat to start messaging </h3>
         </div>)
 
 }

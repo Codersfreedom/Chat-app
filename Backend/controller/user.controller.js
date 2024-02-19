@@ -8,15 +8,24 @@ export const getUsersForSidebar = async (req,res)=>{
         const conversation = await Conversation.find({
             participants:{$all:[loggedInUserId] }
         })
-
+        
         if(!conversation) {
             conversation = []
         }
        
         let users=[];
         for (let i = 0; i < conversation.length; i++) {
-            
-            let user = (conversation[i].participants[1])
+           
+            let user;
+                if(loggedInUserId.toString() ===conversation[i].participants[1].toString()){
+                    console.log('if')
+                    user = (conversation[i].participants[0])
+
+                }
+                else if(loggedInUserId.toString() != conversation[i].participants[1].toString()){
+                    console.log('else if')
+                    user = (conversation[i].participants[1])
+                }
             users.push(user);
         }
         let filteredUsers =[];

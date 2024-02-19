@@ -87,43 +87,30 @@
     
 }
 .chat-room{
-    position: relative;
+    
     width: 100%;
     height:100%;
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-    padding: 10px 0px;
+    display: block;
+    padding: 20px 0px;
     overflow-y: scroll;
 }
 .no-chat{
     margin: 250px auto;
     text-align: center;
 }
-.sender-div{
-    width: 50%;
-    height: 100%;
-    display: flex;
-    justify-content: flex-end ;
-    padding: 5px 10px;
+.start-conversation{
+    margin-top: 50px;
+    text-align: center;
+}
 
-}
-.receiver-div{
-    width: 50%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 5px 10px;
-}
+
 .receiver-chat{
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-    width: fit-content;
+    align-items: flex-start;
+    width: 100%;
     height: fit-content;
-    
+    padding: 0 20px;
 
 }
 .receiver-text{
@@ -145,8 +132,11 @@ margin: 0;
 .sender-chat{
     display: flex;
     flex-direction: column;
+    align-items: flex-end;
     height: fit-content;
-    width: fit-content;
+    width: 100%;  
+    padding: 0 20px;  
+    
     
 }
 .sender-text{
@@ -155,6 +145,7 @@ margin: 0;
     align-items: center;
     justify-content: center;
     height: 40px;
+    width: fit-content;
     background-color: green;
     color: #fff;
     padding: 5px 10px;
@@ -172,7 +163,8 @@ margin: 0;
 
 }
 .chat-date-info .icons{
-    font-size: x-large;
+    font-size: larger;
+    color: #000;
 }
 .chat-date-info>small{
     display: inline;
@@ -192,6 +184,7 @@ margin: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 999;
 }
 .chat-input{
     position: relative;
@@ -204,15 +197,16 @@ margin: 0;
 }
 #emoji{
     position: absolute;
-    right: 35px;
+    right: 65px;
+  
     
 }
-.send-btn{
-    display: flex;
-    align-items: center;
-   height: 100%;
+#sendBtn{
+    
+    position: absolute;
    
-    padding-right: 20px;
+    right: 30px;
+    /* z-index: 9999; */
     font-size: x-large;
     /* background-color: #dadada; */
     margin: 0 auto;

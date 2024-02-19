@@ -5,7 +5,10 @@ import { CiUser } from "react-icons/ci";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { CiLogout } from "react-icons/ci";
 import './SideNav.css'
+import useLogout from '../hooks/useLogout';
 const SideNav = () => {
+
+  const {logout} = useLogout ();
   return (
     
       <aside>
@@ -21,7 +24,7 @@ const SideNav = () => {
             </div>
             <div className="bottom-div">
             <CiUser className='icon' />
-            <CiLogout className='icon' />
+            <CiLogout className='icon' onClick={logout} />
             </div>
         </div>
       </aside>
