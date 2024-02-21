@@ -13,15 +13,20 @@ import useSendMessage from '../hooks/useSendMessage';
 import { useAuthContext } from '../context/AuthContext';
 import useGetMessages from '../hooks/useGetMessages';
 import Chats from './Chats/Chats';
+import useSetLastMessage from '../hooks/useSetLastMessage';
+import useListenMessages from '../hooks/useListenMessages';
 
 const ChatRoom = () => {
 
-    const { selectedConversation, setSelectedConversation } = useConversation();
+    const { selectedConversation, setSelectedConversation, } = useConversation();
     const [message, setMessage] = useState();
     const { sendMessages } = useSendMessage();
     const { messages, loading } = useGetMessages();
-
+    const{setLastMessage} = useSetLastMessage();
+    useListenMessages();
+    
     const lastMessageRef = useRef();
+    
     useEffect(()=>{
         setTimeout(() => {
             lastMessageRef.current?.scrollIntoView({behavior: "smooth"});
@@ -39,10 +44,15 @@ const ChatRoom = () => {
             return
         }
         await sendMessages(message);
+        await setLastMessage(message);
         setMessage("");
     }
 
+   
 
+
+
+   
     return (
         <div className='chat-room-container'>
             {!selectedConversation ? (<NoChatSelected selectedConversation={selectedConversation} />) :

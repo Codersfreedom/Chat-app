@@ -23,7 +23,11 @@ const userSchema = new mongoose.Schema({
     profilePic:{
         type:String,
         default:""
-    }
+    },
+    lastMessage:{
+        type:String,
+        default:""
+    },
     // createdAt, updatedAt
 },{timestamps:true})
 
