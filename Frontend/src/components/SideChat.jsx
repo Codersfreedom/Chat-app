@@ -5,7 +5,7 @@ import './SideChat.css'
 import useGetConversations from '../hooks/useGetConversations';
 import Conversations from './Conversations';
 import useSearchUser from '../hooks/useSearchUser';
-import { useSocketContext } from '../context/SocketContext';
+
 
 
 const SideChat = () => {
@@ -29,6 +29,7 @@ const SideChat = () => {
     
     return (
         <div className='side-chat-container' >
+          
             <form onSubmit={handleSearch} className="search-container">
                 <span>Chat</span>
                 

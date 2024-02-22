@@ -15,6 +15,7 @@ import useGetMessages from '../hooks/useGetMessages';
 import Chats from './Chats/Chats';
 import useSetLastMessage from '../hooks/useSetLastMessage';
 import useListenMessages from '../hooks/useListenMessages';
+import { useSocketContext } from '../context/SocketContext';
 
 const ChatRoom = () => {
 
@@ -24,7 +25,9 @@ const ChatRoom = () => {
     const { messages, loading } = useGetMessages();
     const{setLastMessage} = useSetLastMessage();
     useListenMessages();
+    const{onlineUsers} = useSocketContext();
     
+    const isOnline = onlineUsers?.includes(selectedConversation?._id);
     const lastMessageRef = useRef();
     
     useEffect(()=>{
@@ -62,7 +65,7 @@ const ChatRoom = () => {
                             <img src={selectedConversation.profilePic} alt="user" />
                             <div className="name">
                                 <h4>{selectedConversation.fullname}</h4>
-                                <small>Online</small>
+                                <small> {isOnline? "Online":"Offline"}</small>
                             </div>
                         </div>
                         <div className="profile-tools">

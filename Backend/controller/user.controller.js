@@ -77,7 +77,7 @@ export const getlastMessage = async (req,res) =>{
     res.status(500).json({error:"Internal server error"});
   }
 
-}
+};
 
 export const setLastMessage = async (req,res) =>{
   try {
@@ -95,4 +95,4 @@ export const setLastMessage = async (req,res) =>{
     res.status(500).json({error:"Internal server error"});
     
   }
-}
+};
